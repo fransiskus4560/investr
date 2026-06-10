@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1117">
+  <title>Investr — Checklist Beli Saham</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-left">
+    <button class="icon-btn mobile-only" id="burgerBtn" aria-label="Buka menu"><i class="ti ti-menu-2" aria-hidden="true"></i></button>
+    <div class="logo"><i class="ti ti-chart-treemap" aria-hidden="true"></i>Investr</div>
+    <nav class="nav-links" aria-label="Navigasi utama">
+      <a href="../index.html" class="nav-link"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Dashboard</a>
+      <a href="watchlist.html" class="nav-link"><i class="ti ti-list-check" aria-hidden="true"></i>Watchlist</a>
+      <a href="analisa-harian.html" class="nav-link"><i class="ti ti-sparkles" aria-hidden="true"></i>Analisa AI</a>
+      <a href="portofolio.html" class="nav-link"><i class="ti ti-briefcase" aria-hidden="true"></i>Portofolio</a>
+      <a href="drip.html" class="nav-link"><i class="ti ti-plant-2" aria-hidden="true"></i>DRIP</a>
+    </nav>
+  </div>
+  <div class="topnav-right">
+    <button class="icon-btn" id="themeBtn" aria-label="Ganti mode"><i class="ti ti-sun" id="themeIcon" aria-hidden="true"></i></button>
+    <button class="icon-btn" id="settingsBtn" aria-label="Pengaturan"><i class="ti ti-dots-vertical" aria-hidden="true"></i></button>
+  </div>
+</nav>
+
+<div class="settings-dropdown" id="settingsDropdown" role="menu">
+  <div class="settings-item" id="chkResetBtn"><i class="ti ti-refresh" aria-hidden="true"></i>Reset checklist</div>
+  <div class="settings-item"><i class="ti ti-edit" aria-hidden="true"></i>Edit pertanyaan</div>
+</div>
+
+<div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+<aside class="drawer" id="drawer" aria-label="Menu navigasi">
+  <div class="drawer-header">
+    <div class="drawer-logo"><i class="ti ti-chart-treemap" aria-hidden="true"></i>Investr</div>
+    <div class="drawer-user">Selamat datang</div>
+  </div>
+  <div class="drawer-nav">
+    <div class="drawer-section-label">Halaman utama</div>
+    <a href="../index.html" class="drawer-item"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Dashboard</a>
+    <a href="watchlist.html" class="drawer-item"><i class="ti ti-list-check" aria-hidden="true"></i>Watchlist</a>
+    <a href="analisa-harian.html" class="drawer-item"><i class="ti ti-sparkles" aria-hidden="true"></i>Analisa Harian AI</a>
+    <a href="analisis-saham.html" class="drawer-item"><i class="ti ti-report-analytics" aria-hidden="true"></i>Analisis Saham</a>
+    <a href="portofolio.html" class="drawer-item"><i class="ti ti-briefcase" aria-hidden="true"></i>Portofolio</a>
+    <a href="drip.html" class="drawer-item"><i class="ti ti-plant-2" aria-hidden="true"></i>DRIP Simulator</a>
+    <div class="drawer-section-label" style="margin-top:8px">Pengelolaan</div>
+    <a href="akun.html" class="drawer-item"><i class="ti ti-building-bank" aria-hidden="true"></i>Akun & Sekuritas</a>
+    <a href="riwayat.html" class="drawer-item"><i class="ti ti-history" aria-hidden="true"></i>Riwayat & Jurnal</a>
+    <div class="drawer-section-label" style="margin-top:8px">Tools</div>
+    <a href="skenario.html" class="drawer-item"><i class="ti ti-adjustments" aria-hidden="true"></i>Skenario Investasi</a>
+    <button class="drawer-item active"><i class="ti ti-checklist" aria-hidden="true"></i>Checklist Beli Saham</button>
+  </div>
+  <div class="drawer-footer">
+    <button class="drawer-item" id="drawerThemeBtn"><i class="ti ti-sun" id="drawerThemeIcon" aria-hidden="true"></i><span id="drawerThemeText">Mode terang</span></button>
+    <button class="drawer-item"><i class="ti ti-user" aria-hidden="true"></i>Profil & Akun</button>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Checklist Beli Saham</h1>
+      <p class="page-subtitle"><span class="live-indicator" aria-label="Live"></span>10 pertanyaan sebelum kamu klik "beli"</p>
+    </div>
+  </div>
+
+  <div class="chk-intro">
+    <i class="ti ti-brain" aria-hidden="true"></i>
+    <div class="chk-intro-text">
+      <strong>Ini pelindung dari keputusan emosional.</strong>
+      Centang jujur sebelum membeli saham apapun. Kesalahan termahal dalam investasi bukan soal analisa — tapi soal psikologi: FOMO, panik, dan terburu-buru. Checklist ini memaksa kamu berhenti sejenak dan berpikir jernih.
+    </div>
+  </div>
+
+  <div class="chk-progress-card">
+    <div class="chk-score" id="chkScore">0%</div>
+    <div class="chk-score-label" id="chkScoreLabel">0 dari 0 poin terpenuhi</div>
+    <div><span class="chk-verdict chk-verdict-stop" id="chkVerdict">✕ Belum siap</span></div>
+  </div>
+
+  <div id="chkSections"></div>
+
+  <div class="chk-reset">
+    <button class="wl-btn" onclick="resetChecklist()"><i class="ti ti-refresh" aria-hidden="true"></i>Reset Checklist</button>
+  </div>
+
+  <p style="font-size:11px;color:var(--text-muted);margin-top:16px;line-height:1.5">
+    <i class="ti ti-info-circle" aria-hidden="true" style="vertical-align:-2px"></i>
+    Skor terhitung dari bobot tiap pertanyaan — yang paling penting (paham bisnis, niat jelas, stop loss, anti-FOMO) punya bobot tertinggi. Centangmu tersimpan otomatis. Ini bukan nasihat keuangan, tapi alat disiplin untuk dirimu sendiri.
+  </p>
+</main>
+
+<nav class="bottom-nav" aria-label="Navigasi bawah">
+  <a href="../index.html" class="bottom-nav-item" aria-label="Dashboard"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Home</a>
+  <a href="watchlist.html" class="bottom-nav-item" aria-label="Watchlist"><i class="ti ti-list-check" aria-hidden="true"></i>Watchlist</a>
+  <a href="analisa-harian.html" class="bottom-nav-item" aria-label="Analisa AI"><i class="ti ti-sparkles" aria-hidden="true"></i>Analisa</a>
+  <a href="portofolio.html" class="bottom-nav-item" aria-label="Portofolio"><i class="ti ti-briefcase" aria-hidden="true"></i>Porto</a>
+  <a href="drip.html" class="bottom-nav-item" aria-label="DRIP"><i class="ti ti-plant-2" aria-hidden="true"></i>DRIP</a>
+</nav>
+
+<script src="../js/checklist.js"></script>
+</body>
+</html>

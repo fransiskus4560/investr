@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1117">
+  <title>Investr — Analisis Saham</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<!-- TOP NAVBAR -->
+<nav class="topnav">
+  <div class="topnav-left">
+    <button class="icon-btn mobile-only" id="burgerBtn" aria-label="Buka menu"><i class="ti ti-menu-2" aria-hidden="true"></i></button>
+    <div class="logo"><i class="ti ti-chart-treemap" aria-hidden="true"></i>Investr</div>
+    <nav class="nav-links" aria-label="Navigasi utama">
+      <a href="../index.html" class="nav-link"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Dashboard</a>
+      <a href="watchlist.html" class="nav-link"><i class="ti ti-list-check" aria-hidden="true"></i>Watchlist</a>
+      <a href="analisa-harian.html" class="nav-link"><i class="ti ti-sparkles" aria-hidden="true"></i>Analisa AI</a>
+      <a href="portofolio.html" class="nav-link"><i class="ti ti-briefcase" aria-hidden="true"></i>Portofolio</a>
+      <a href="drip.html" class="nav-link"><i class="ti ti-plant-2" aria-hidden="true"></i>DRIP</a>
+    </nav>
+  </div>
+  <div class="topnav-right">
+    <button class="icon-btn" id="themeBtn" aria-label="Ganti mode"><i class="ti ti-sun" id="themeIcon" aria-hidden="true"></i></button>
+    <button class="icon-btn" id="settingsBtn" aria-label="Pengaturan"><i class="ti ti-dots-vertical" aria-hidden="true"></i></button>
+  </div>
+</nav>
+
+<div class="settings-dropdown" id="settingsDropdown" role="menu">
+  <div class="settings-item"><i class="ti ti-plus" aria-hidden="true"></i>Tambah ke Watchlist</div>
+  <div class="settings-item"><i class="ti ti-bell" aria-hidden="true"></i>Pasang alert harga</div>
+  <div class="settings-item"><i class="ti ti-sparkles" aria-hidden="true"></i>Analisa AI saham ini</div>
+  <div class="settings-item"><i class="ti ti-download" aria-hidden="true"></i>Export laporan</div>
+</div>
+
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+<aside class="drawer" id="drawer" aria-label="Menu navigasi">
+  <div class="drawer-header">
+    <div class="drawer-logo"><i class="ti ti-chart-treemap" aria-hidden="true"></i>Investr</div>
+    <div class="drawer-user">Selamat datang</div>
+  </div>
+  <div class="drawer-nav">
+    <div class="drawer-section-label">Halaman utama</div>
+    <a href="../index.html" class="drawer-item"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Dashboard</a>
+    <a href="watchlist.html" class="drawer-item"><i class="ti ti-list-check" aria-hidden="true"></i>Watchlist</a>
+    <a href="analisa-harian.html" class="drawer-item"><i class="ti ti-sparkles" aria-hidden="true"></i>Analisa Harian AI</a>
+    <button class="drawer-item active"><i class="ti ti-report-analytics" aria-hidden="true"></i>Analisis Saham</button>
+    <a href="portofolio.html" class="drawer-item"><i class="ti ti-briefcase" aria-hidden="true"></i>Portofolio</a>
+    <a href="drip.html" class="drawer-item"><i class="ti ti-plant-2" aria-hidden="true"></i>DRIP Simulator</a>
+    <div class="drawer-section-label" style="margin-top:8px">Pengelolaan</div>
+    <a href="akun.html" class="drawer-item"><i class="ti ti-building-bank" aria-hidden="true"></i>Akun & Sekuritas</a>
+    <a href="riwayat.html" class="drawer-item"><i class="ti ti-history" aria-hidden="true"></i>Riwayat & Jurnal</a>
+    <div class="drawer-section-label" style="margin-top:8px">Tools</div>
+    <a href="skenario.html" class="drawer-item"><i class="ti ti-adjustments" aria-hidden="true"></i>Skenario Investasi</a>
+    <a href="checklist.html" class="drawer-item"><i class="ti ti-checklist" aria-hidden="true"></i>Checklist Beli Saham</a>
+  </div>
+  <div class="drawer-footer">
+    <button class="drawer-item" id="drawerThemeBtn"><i class="ti ti-sun" id="drawerThemeIcon" aria-hidden="true"></i><span id="drawerThemeText">Mode terang</span></button>
+    <button class="drawer-item"><i class="ti ti-user" aria-hidden="true"></i>Profil & Akun</button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main-content">
+
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Analisis Saham</h1>
+      <p class="page-subtitle">
+        <span class="live-indicator" aria-label="Live"></span>
+        Bedah satu saham dari dua kacamata: investor & trader
+      </p>
+    </div>
+  </div>
+
+  <!-- Stock selector -->
+  <div class="stock-selector">
+    <div class="stock-search">
+      <i class="ti ti-search" aria-hidden="true"></i>
+      <input type="text" id="stockSearchInput" placeholder="Cari kode saham... (BBRI, BBCA, TLKM, ASII, GOTO)" autocomplete="off">
+    </div>
+  </div>
+  <div class="stock-intent-tags" style="margin-bottom:16px">
+    <span class="stock-intent-tag" data-stock="BBRI">BBRI</span>
+    <span class="stock-intent-tag" data-stock="BBCA">BBCA</span>
+    <span class="stock-intent-tag" data-stock="TLKM">TLKM</span>
+    <span class="stock-intent-tag" data-stock="ASII">ASII</span>
+    <span class="stock-intent-tag" data-stock="GOTO">GOTO</span>
+  </div>
+
+  <!-- Stock header -->
+  <div class="stock-head">
+    <div class="stock-head-top">
+      <div class="stock-id">
+        <div class="stock-logo" id="saLogo">BR</div>
+        <div>
+          <div class="stock-ticker" id="saTicker">BBRI</div>
+          <div class="stock-name" id="saName">Bank Rakyat Indonesia</div>
+        </div>
+      </div>
+      <div class="stock-price-box">
+        <div class="stock-price" id="saPrice">Rp 5.125</div>
+        <div class="stock-change text-up" id="saChange">▲ +1,24%</div>
+      </div>
+    </div>
+    <div class="stock-intent-tags">
+      <span class="stock-intent-tag active-invest">📊 Untuk Investasi</span>
+      <span class="stock-intent-tag">⚡ Untuk Trading</span>
+    </div>
+  </div>
+
+  <!-- Chart -->
+  <div class="stock-chart-card">
+    <div class="flex-between" style="margin-bottom:8px">
+      <div class="metrics-section-title" style="margin-bottom:0"><i class="ti ti-chart-candle" aria-hidden="true"></i>Candlestick — Pergerakan Harga</div>
+    </div>
+    <div class="chart-meta-row" id="saChart-meta"></div>
+    <div id="saChart"></div>
+    <div class="time-tabs" id="saTimeframes">
+      <button class="time-tab" data-tf="1D">1D</button>
+      <button class="time-tab" data-tf="1W">1W</button>
+      <button class="time-tab active" data-tf="1M">1M</button>
+      <button class="time-tab" data-tf="3M">3M</button>
+      <button class="time-tab" data-tf="6M">6M</button>
+      <button class="time-tab" data-tf="1Y">1Y</button>
+      <button class="time-tab" data-tf="3Y">3Y</button>
+      <button class="time-tab" data-tf="All">All</button>
+    </div>
+  </div>
+
+  <!-- Dual verdict -->
+  <div class="dual-verdict">
+    <div class="verdict-lens investor">
+      <div class="verdict-lens-head">
+        <div class="verdict-lens-icon"><i class="ti ti-building-bank" aria-hidden="true"></i></div>
+        <div>
+          <div class="verdict-lens-title">Kacamata Investor</div>
+          <div class="verdict-lens-sub">Fundamental · jangka panjang</div>
+        </div>
+      </div>
+      <div class="verdict-lens-action" id="investorAction">BUY</div>
+      <div class="verdict-lens-reason" id="investorReason"></div>
+    </div>
+
+    <div class="verdict-lens trader">
+      <div class="verdict-lens-head">
+        <div class="verdict-lens-icon"><i class="ti ti-bolt" aria-hidden="true"></i></div>
+        <div>
+          <div class="verdict-lens-title">Kacamata Trader</div>
+          <div class="verdict-lens-sub">Teknikal · jangka pendek</div>
+        </div>
+      </div>
+      <div class="verdict-lens-action" id="traderAction">HOLD</div>
+      <div class="verdict-lens-reason" id="traderReason"></div>
+    </div>
+  </div>
+
+  <!-- Fair value -->
+  <div class="fairvalue-card">
+    <div class="fv-title"><i class="ti ti-scale" aria-hidden="true"></i>Posisi Harga vs Nilai Wajar</div>
+    <div class="fv-bar-wrap">
+      <div class="fv-bar"></div>
+      <div class="fv-marker" id="fvMarker" style="left:50%"></div>
+      <div class="fv-marker-label" id="fvMarkerLabel" style="left:50%">Rp 5.125</div>
+    </div>
+    <div class="fv-scale">
+      <span>Undervalue</span><span>Fair</span><span>Overvalue</span>
+    </div>
+    <div class="fv-values">
+      <div class="fv-value-item"><div class="fv-value-label">Batas bawah</div><div class="fv-value-num" id="fvLow">—</div></div>
+      <div class="fv-value-item"><div class="fv-value-label">Nilai wajar</div><div class="fv-value-num" id="fvFair">—</div></div>
+      <div class="fv-value-item"><div class="fv-value-label">Batas atas</div><div class="fv-value-num" id="fvHigh">—</div></div>
+    </div>
+    <div style="text-align:center;margin-top:12px"><span id="fvVerdict" class="metric-box-judge"></span></div>
+  </div>
+
+  <!-- Metrics -->
+  <div class="metrics-section">
+    <div class="metrics-section-title"><i class="ti ti-calculator" aria-hidden="true"></i>Metrik Fundamental (Kalkulasi Objektif)</div>
+    <div class="metrics-grid" id="metricsGrid"></div>
+  </div>
+
+  <p style="font-size:11px;color:var(--text-muted);margin-top:4px;line-height:1.5">
+    <i class="ti ti-info-circle" aria-hidden="true" style="vertical-align:-2px"></i>
+    Setiap saham dianalisa dari dua kacamata karena satu angka tidak cukup — saham yang "mahal" bagi investor bisa "menarik" bagi trader, tergantung tujuanmu. Penilaian metrik (Murah/Wajar/Mahal) dihitung otomatis dari aturan objektif. Bukan nasihat keuangan.
+  </p>
+
+</main>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" aria-label="Navigasi bawah">
+  <a href="../index.html" class="bottom-nav-item" aria-label="Dashboard"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Home</a>
+  <a href="watchlist.html" class="bottom-nav-item" aria-label="Watchlist"><i class="ti ti-list-check" aria-hidden="true"></i>Watchlist</a>
+  <button class="bottom-nav-item active" aria-label="Analisis Saham"><i class="ti ti-report-analytics" aria-hidden="true"></i>Analisis</button>
+  <a href="portofolio.html" class="bottom-nav-item" aria-label="Portofolio"><i class="ti ti-briefcase" aria-hidden="true"></i>Porto</a>
+  <a href="drip.html" class="bottom-nav-item" aria-label="DRIP"><i class="ti ti-plant-2" aria-hidden="true"></i>DRIP</a>
+</nav>
+
+<script src="../js/candlestick.js"></script>
+<script src="../js/stock.js"></script>
+</body>
+</html>
