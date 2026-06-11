@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1117">
+  <title>Investr — Portofolio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<!-- TOP NAVBAR -->
+<nav class="topnav">
+  <div class="topnav-left">
+    <button class="icon-btn mobile-only" id="burgerBtn" aria-label="Buka menu"><i class="ti ti-menu-2" aria-hidden="true"></i></button>
+    <div class="logo"><i class="ti ti-chart-treemap" aria-hidden="true"></i>Investr</div>
+    <nav class="nav-links" aria-label="Navigasi utama">
+      <a href="../index.html" class="nav-link"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Dashboard</a>
+      <a href="watchlist.html" class="nav-link"><i class="ti ti-list-check" aria-hidden="true"></i>Watchlist</a>
+      <a href="analisa-harian.html" class="nav-link"><i class="ti ti-sparkles" aria-hidden="true"></i>Analisa AI</a>
+      <button class="nav-link active" aria-current="page"><i class="ti ti-briefcase" aria-hidden="true"></i>Portofolio</button>
+      <a href="drip.html" class="nav-link"><i class="ti ti-plant-2" aria-hidden="true"></i>DRIP</a>
+    </nav>
+  </div>
+  <div class="topnav-right">
+    <div class="market-switcher" role="group" aria-label="Pilih pasar">
+      <button class="market-pill active" data-market="IDX">IDX</button>
+      <button class="market-pill" data-market="US">US</button>
+      <button class="market-pill" data-market="ASX">ASX</button>
+      <button class="market-pill" data-market="Crypto">Crypto</button>
+    </div>
+    <button class="icon-btn" id="themeBtn" aria-label="Ganti mode"><i class="ti ti-sun" id="themeIcon" aria-hidden="true"></i></button>
+    <button class="icon-btn" id="settingsBtn" aria-label="Pengaturan"><i class="ti ti-dots-vertical" aria-hidden="true"></i></button>
+  </div>
+</nav>
+
+<div class="settings-dropdown" id="settingsDropdown" role="menu">
+  <div class="settings-item"><i class="ti ti-plus" aria-hidden="true"></i>Tambah transaksi</div>
+  <div class="settings-item"><i class="ti ti-receipt-2" aria-hidden="true"></i>Riwayat transaksi</div>
+  <div class="settings-item"><i class="ti ti-percentage" aria-hidden="true"></i>Hitung pajak</div>
+  <div class="settings-item"><i class="ti ti-download" aria-hidden="true"></i>Export portofolio</div>
+</div>
+
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+<aside class="drawer" id="drawer" aria-label="Menu navigasi">
+  <div class="drawer-header">
+    <div class="drawer-logo"><i class="ti ti-chart-treemap" aria-hidden="true"></i>Investr</div>
+    <div class="drawer-user">Selamat datang</div>
+  </div>
+  <div class="drawer-nav">
+    <div class="drawer-section-label">Halaman utama</div>
+    <a href="../index.html" class="drawer-item"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Dashboard</a>
+    <a href="watchlist.html" class="drawer-item"><i class="ti ti-list-check" aria-hidden="true"></i>Watchlist</a>
+    <a href="analisa-harian.html" class="drawer-item"><i class="ti ti-sparkles" aria-hidden="true"></i>Analisa Harian AI</a>
+    <a href="analisis-saham.html" class="drawer-item"><i class="ti ti-report-analytics" aria-hidden="true"></i>Analisis Saham</a>
+    <button class="drawer-item active"><i class="ti ti-briefcase" aria-hidden="true"></i>Portofolio</button>
+    <a href="drip.html" class="drawer-item"><i class="ti ti-plant-2" aria-hidden="true"></i>DRIP Simulator</a>
+    <div class="drawer-section-label" style="margin-top:8px">Pengelolaan</div>
+    <a href="akun.html" class="drawer-item"><i class="ti ti-building-bank" aria-hidden="true"></i>Akun & Sekuritas</a>
+    <a href="riwayat.html" class="drawer-item"><i class="ti ti-history" aria-hidden="true"></i>Riwayat & Jurnal</a>
+    <div class="drawer-section-label" style="margin-top:8px">Tools</div>
+    <a href="skenario.html" class="drawer-item"><i class="ti ti-adjustments" aria-hidden="true"></i>Skenario Investasi</a>
+    <a href="checklist.html" class="drawer-item"><i class="ti ti-checklist" aria-hidden="true"></i>Checklist Beli Saham</a>
+  </div>
+  <div class="drawer-footer">
+    <button class="drawer-item" id="drawerThemeBtn"><i class="ti ti-sun" id="drawerThemeIcon" aria-hidden="true"></i><span id="drawerThemeText">Mode terang</span></button>
+    <button class="drawer-item"><i class="ti ti-user" aria-hidden="true"></i>Profil & Akun</button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main-content">
+
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Portofolio</h1>
+      <p class="page-subtitle">
+        <span class="live-indicator" aria-label="Live"></span>
+        Posisi yang kamu miliki saat ini
+      </p>
+    </div>
+  </div>
+
+  <!-- Summary cards -->
+  <div class="porto-summary">
+    <div class="porto-sum-card highlight">
+      <div class="porto-sum-label"><i class="ti ti-wallet" aria-hidden="true"></i>Nilai portofolio</div>
+      <div class="porto-sum-value" id="sumTotalValue">Rp 0</div>
+      <div class="porto-sum-sub text-muted" id="sumTotalCost">Modal: Rp 0</div>
+    </div>
+    <div class="porto-sum-card">
+      <div class="porto-sum-label"><i class="ti ti-trending-up" aria-hidden="true"></i>Untung / Rugi</div>
+      <div class="porto-sum-value text-up" id="sumPnl">+Rp 0</div>
+      <div class="porto-sum-sub text-up" id="sumPnlPct">+0% total return</div>
+    </div>
+    <div class="porto-sum-card">
+      <div class="porto-sum-label"><i class="ti ti-arrow-up-circle" aria-hidden="true"></i>Terbaik</div>
+      <div class="porto-sum-value" id="sumBest">—</div>
+      <div class="porto-sum-sub text-up" id="sumBestPct">+0%</div>
+    </div>
+    <div class="porto-sum-card">
+      <div class="porto-sum-label"><i class="ti ti-arrow-down-circle" aria-hidden="true"></i>Terlemah</div>
+      <div class="porto-sum-value" id="sumWorst">—</div>
+      <div class="porto-sum-sub text-down" id="sumWorstPct">0%</div>
+    </div>
+  </div>
+
+  <!-- Holdings -->
+  <div class="porto-card">
+    <div class="porto-card-head">
+      <div class="porto-card-title"><i class="ti ti-list-details" aria-hidden="true"></i>Daftar Kepemilikan</div>
+      <button class="wl-btn wl-btn-primary"><i class="ti ti-plus" aria-hidden="true"></i>Tambah Posisi</button>
+    </div>
+    <div class="porto-table-wrap">
+      <table class="porto-table" aria-label="Daftar kepemilikan saham">
+        <thead>
+          <tr>
+            <th class="left">Saham</th>
+            <th>Jumlah</th>
+            <th>Avg Beli</th>
+            <th>Harga Kini</th>
+            <th>Nilai Kini</th>
+            <th>P&L</th>
+            <th>Return</th>
+            <th>Bobot</th>
+          </tr>
+        </thead>
+        <tbody id="holdingsBody"></tbody>
+      </table>
+    </div>
+    <div class="porto-mobile" id="holdingsMobile"></div>
+  </div>
+
+  <!-- Allocation + Position Sizing -->
+  <div class="sizing-grid">
+
+    <!-- Allocation donut -->
+    <div class="porto-card" style="padding:16px">
+      <div class="porto-card-title" style="margin-bottom:16px"><i class="ti ti-chart-pie" aria-hidden="true"></i>Alokasi per Sektor</div>
+      <div class="porto-donut-wrap">
+        <svg width="88" height="88" viewBox="0 0 88 88" id="portoDonut" aria-label="Alokasi sektor"></svg>
+        <div class="porto-donut-legend" id="portoDonutLegend"></div>
+      </div>
+    </div>
+
+    <!-- Position sizing -->
+    <div class="porto-card" style="padding:16px">
+      <div class="porto-card-title" style="margin-bottom:8px"><i class="ti ti-ruler-2" aria-hidden="true"></i>Kalkulator Position Sizing</div>
+      <p style="font-size:11px;color:var(--text-muted);margin-bottom:12px;line-height:1.5">Berapa banyak yang aman dibeli berdasarkan manajemen risiko. Aturan umum: jangan risiko lebih dari 1–2% modal per transaksi.</p>
+
+      <div class="sizing-input-row">
+        <span class="sizing-input-label">Total modal investasi</span>
+        <input type="number" class="sizing-input-field" id="szCapital" value="100000000">
+      </div>
+      <div class="sizing-input-row">
+        <span class="sizing-input-label">Harga saham target</span>
+        <input type="number" class="sizing-input-field" id="szPrice" value="5000">
+      </div>
+      <div class="sizing-input-row">
+        <span class="sizing-input-label">Stop loss (%)</span>
+        <input type="number" class="sizing-input-field" id="szStopPct" value="10">
+      </div>
+      <div class="sizing-input-row">
+        <span class="sizing-input-label">Max risk per trade (%)</span>
+        <input type="number" class="sizing-input-field" id="szRiskPct" value="2">
+      </div>
+
+      <div style="height:12px"></div>
+
+      <div class="sizing-result-row">
+        <span class="sizing-result-label">Risiko maksimal (Rp)</span>
+        <span class="sizing-result-value" id="szRiskRp">—</span>
+      </div>
+      <div class="sizing-result-row highlight">
+        <span class="sizing-result-label">Jumlah saham optimal</span>
+        <span class="sizing-result-value big" id="szShares">—</span>
+      </div>
+      <div class="sizing-result-row">
+        <span class="sizing-result-label">Modal dibutuhkan</span>
+        <span class="sizing-result-value" id="szCapNeeded">—</span>
+      </div>
+      <div class="sizing-result-row">
+        <span class="sizing-result-label">Porsi dari modal</span>
+        <span class="sizing-result-value" id="szCapPct">—</span>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="font-size:11px;color:var(--text-muted);margin-top:14px;line-height:1.5">
+    <i class="ti ti-info-circle" aria-hidden="true" style="vertical-align:-2px"></i>
+    Data kepemilikan ini contoh untuk v1. Di v2, kamu input transaksi sendiri dan tersimpan di akun kamu. Position sizing calculator sudah berfungsi penuh — coba ubah angkanya.
+  </p>
+
+</main>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" aria-label="Navigasi bawah">
+  <a href="../index.html" class="bottom-nav-item" aria-label="Dashboard"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Home</a>
+  <a href="watchlist.html" class="bottom-nav-item" aria-label="Watchlist"><i class="ti ti-list-check" aria-hidden="true"></i>Watchlist</a>
+  <a href="analisa-harian.html" class="bottom-nav-item" aria-label="Analisa AI"><i class="ti ti-sparkles" aria-hidden="true"></i>Analisa</a>
+  <button class="bottom-nav-item active" aria-label="Portofolio"><i class="ti ti-briefcase" aria-hidden="true"></i>Porto</button>
+  <a href="drip.html" class="bottom-nav-item" aria-label="DRIP"><i class="ti ti-plant-2" aria-hidden="true"></i>DRIP</a>
+</nav>
+
+<script type="module" src="../js/firebase-config.js"></script>
+<script src="../js/auth-ui.js"></script>
+<script src="../js/storage-bridge.js"></script>
+<script src="../js/holdings-engine.js"></script>
+<script src="../js/portfolio.js"></script>
+</body>
+</html>

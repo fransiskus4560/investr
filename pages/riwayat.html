@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1117">
+  <title>Investr — Riwayat & Jurnal</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<!-- TOP NAVBAR -->
+<nav class="topnav">
+  <div class="topnav-left">
+    <button class="icon-btn mobile-only" id="burgerBtn" aria-label="Buka menu"><i class="ti ti-menu-2" aria-hidden="true"></i></button>
+    <div class="logo"><i class="ti ti-chart-treemap" aria-hidden="true"></i>Investr</div>
+    <nav class="nav-links" aria-label="Navigasi utama">
+      <a href="../index.html" class="nav-link"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Dashboard</a>
+      <a href="watchlist.html" class="nav-link"><i class="ti ti-list-check" aria-hidden="true"></i>Watchlist</a>
+      <a href="analisa-harian.html" class="nav-link"><i class="ti ti-sparkles" aria-hidden="true"></i>Analisa AI</a>
+      <a href="portofolio.html" class="nav-link"><i class="ti ti-briefcase" aria-hidden="true"></i>Portofolio</a>
+      <a href="akun.html" class="nav-link"><i class="ti ti-building-bank" aria-hidden="true"></i>Akun</a>
+    </nav>
+  </div>
+  <div class="topnav-right">
+    <button class="icon-btn" id="themeBtn" aria-label="Ganti mode"><i class="ti ti-sun" id="themeIcon" aria-hidden="true"></i></button>
+    <button class="icon-btn" id="settingsBtn" aria-label="Pengaturan"><i class="ti ti-dots-vertical" aria-hidden="true"></i></button>
+  </div>
+</nav>
+
+<div class="settings-dropdown" id="settingsDropdown" role="menu">
+  <div class="settings-item"><i class="ti ti-file-export" aria-hidden="true"></i>Export ke CSV/Excel</div>
+  <div class="settings-item"><i class="ti ti-calendar" aria-hidden="true"></i>Filter per periode</div>
+  <div class="settings-item"><i class="ti ti-percentage" aria-hidden="true"></i>Laporan pajak tahunan</div>
+  <div class="settings-item"><i class="ti ti-chart-dots" aria-hidden="true"></i>Statistik lengkap</div>
+</div>
+
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+<aside class="drawer" id="drawer" aria-label="Menu navigasi">
+  <div class="drawer-header">
+    <div class="drawer-logo"><i class="ti ti-chart-treemap" aria-hidden="true"></i>Investr</div>
+    <div class="drawer-user">Selamat datang</div>
+  </div>
+  <div class="drawer-nav">
+    <div class="drawer-section-label">Halaman utama</div>
+    <a href="../index.html" class="drawer-item"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Dashboard</a>
+    <a href="watchlist.html" class="drawer-item"><i class="ti ti-list-check" aria-hidden="true"></i>Watchlist</a>
+    <a href="analisa-harian.html" class="drawer-item"><i class="ti ti-sparkles" aria-hidden="true"></i>Analisa Harian AI</a>
+    <a href="analisis-saham.html" class="drawer-item"><i class="ti ti-report-analytics" aria-hidden="true"></i>Analisis Saham</a>
+    <a href="portofolio.html" class="drawer-item"><i class="ti ti-briefcase" aria-hidden="true"></i>Portofolio</a>
+    <a href="drip.html" class="drawer-item"><i class="ti ti-plant-2" aria-hidden="true"></i>DRIP Simulator</a>
+    <div class="drawer-section-label" style="margin-top:8px">Pengelolaan</div>
+    <a href="akun.html" class="drawer-item"><i class="ti ti-building-bank" aria-hidden="true"></i>Akun & Sekuritas</a>
+    <button class="drawer-item active"><i class="ti ti-history" aria-hidden="true"></i>Riwayat & Jurnal</button>
+    <div class="drawer-section-label" style="margin-top:8px">Tools</div>
+    <a href="skenario.html" class="drawer-item"><i class="ti ti-adjustments" aria-hidden="true"></i>Skenario Investasi</a>
+    <a href="checklist.html" class="drawer-item"><i class="ti ti-checklist" aria-hidden="true"></i>Checklist Beli Saham</a>
+  </div>
+  <div class="drawer-footer">
+    <button class="drawer-item" id="drawerThemeBtn"><i class="ti ti-sun" id="drawerThemeIcon" aria-hidden="true"></i><span id="drawerThemeText">Mode terang</span></button>
+    <button class="drawer-item"><i class="ti ti-user" aria-hidden="true"></i>Profil & Akun</button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main-content">
+
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Riwayat & Jurnal</h1>
+      <p class="page-subtitle">
+        <span class="live-indicator" aria-label="Live"></span>
+        Catatan setiap transaksi — guru terbaik jangka panjang
+      </p>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="jr-summary">
+    <div class="jr-sum-card">
+      <div class="jr-sum-label"><i class="ti ti-receipt" aria-hidden="true"></i>Total transaksi</div>
+      <div class="jr-sum-value" id="jrTotalTx">0</div>
+      <div class="jr-sum-sub text-muted" id="jrTotalTxSub">0 beli · 0 jual</div>
+    </div>
+    <div class="jr-sum-card">
+      <div class="jr-sum-label"><i class="ti ti-cash" aria-hidden="true"></i>Realized P&L</div>
+      <div class="jr-sum-value text-up" id="jrRealized">+Rp 0</div>
+      <div class="jr-sum-sub text-muted" id="jrRealizedSub">0 posisi ditutup</div>
+    </div>
+    <div class="jr-sum-card">
+      <div class="jr-sum-label"><i class="ti ti-target" aria-hidden="true"></i>Win rate</div>
+      <div class="jr-sum-value" id="jrWinRate">0%</div>
+      <div class="jr-sum-sub text-muted" id="jrWinRateSub">0 dari 0 profit</div>
+    </div>
+    <div class="jr-sum-card">
+      <div class="jr-sum-label"><i class="ti ti-coin" aria-hidden="true"></i>Total fee</div>
+      <div class="jr-sum-value" id="jrTotalFees">Rp 0</div>
+      <div class="jr-sum-sub text-muted" id="jrTotalFeesSub">biaya terbukukan</div>
+    </div>
+  </div>
+
+  <!-- Toolbar / filters -->
+  <div class="jr-toolbar">
+    <div class="jr-filters">
+      <select class="wl-select" onchange="setFilterType(this.value)" aria-label="Filter jenis">
+        <option value="all" data-ftype="all">Semua jenis</option>
+        <option value="buy" data-ftype="buy">Beli saja</option>
+        <option value="sell" data-ftype="sell">Jual saja</option>
+      </select>
+      <select class="wl-select" onchange="setFilterIntent(this.value)" aria-label="Filter niat">
+        <option value="all" data-fintent="all">Semua niat</option>
+        <option value="invest" data-fintent="invest">Investasi</option>
+        <option value="trade" data-fintent="trade">Trading</option>
+      </select>
+    </div>
+    <button class="wl-btn wl-btn-primary" id="addTxBtn"><i class="ti ti-plus" aria-hidden="true"></i>Catat Transaksi</button>
+  </div>
+
+  <!-- Transaction list -->
+  <div class="jr-card">
+    <div class="jr-table-wrap">
+      <table class="jr-table" aria-label="Riwayat transaksi">
+        <thead>
+          <tr>
+            <th class="left">Tanggal</th>
+            <th class="left">Jenis</th>
+            <th class="left">Saham</th>
+            <th class="left">Akun</th>
+            <th>Jumlah</th>
+            <th>Harga</th>
+            <th>Fee</th>
+            <th>Realized P&L</th>
+          </tr>
+        </thead>
+        <tbody id="jrTableBody"></tbody>
+      </table>
+    </div>
+    <div class="jr-mobile" id="jrMobile"></div>
+  </div>
+
+  <p style="font-size:11px;color:var(--text-muted);margin-top:14px;line-height:1.5">
+    <i class="ti ti-lock" aria-hidden="true" style="vertical-align:-2px"></i>
+    Ikon gembok di kolom fee menandakan fee sudah "dibekukan" di transaksi itu sesuai kondisi saat dibuat. Mengubah fee di halaman Akun tidak akan mengubah transaksi lama — riwayatmu selalu akurat.
+  </p>
+
+</main>
+
+<!-- Add Transaction Modal -->
+<div class="modal-overlay" id="txModal" role="dialog" aria-modal="true">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header">
+      <span class="modal-title">Catat Transaksi</span>
+      <button class="icon-btn" id="txModalClose" aria-label="Tutup"><i class="ti ti-x" aria-hidden="true"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="modal-label">Jenis transaksi</label>
+          <div class="fee-type-toggle" style="width:100%">
+            <label class="fee-type-btn active" style="flex:1;text-align:center;cursor:pointer">
+              <input type="radio" name="txType" value="buy" checked style="display:none">Beli
+            </label>
+            <label class="fee-type-btn" style="flex:1;text-align:center;cursor:pointer">
+              <input type="radio" name="txType" value="sell" style="display:none">Jual
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="modal-label">Niat</label>
+          <div class="fee-type-toggle" style="width:100%">
+            <label class="fee-type-btn active" style="flex:1;text-align:center;cursor:pointer">
+              <input type="radio" name="txIntent" value="invest" checked style="display:none">Investasi
+            </label>
+            <label class="fee-type-btn" style="flex:1;text-align:center;cursor:pointer">
+              <input type="radio" name="txIntent" value="trade" style="display:none">Trading
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:12px"></div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="modal-label" for="txTicker">Kode saham</label>
+          <input type="text" class="modal-input" id="txTicker" placeholder="BBRI" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="modal-label" for="txDate">Tanggal</label>
+          <input type="date" class="modal-input" id="txDate">
+        </div>
+        <div class="form-group">
+          <label class="modal-label" for="txQty">Jumlah (lembar)</label>
+          <input type="number" class="modal-input" id="txQty" placeholder="1000">
+        </div>
+        <div class="form-group">
+          <label class="modal-label" for="txPrice">Harga per lembar</label>
+          <input type="number" class="modal-input" id="txPrice" placeholder="4500">
+        </div>
+        <div class="form-group">
+          <label class="modal-label" for="txAcc">Akun / Sekuritas</label>
+          <select class="modal-input" id="txAcc">
+            <option>Stockbit</option>
+            <option>Ajaib</option>
+            <option>IPOT</option>
+            <option>Bibit</option>
+            <option>Mirae</option>
+            <option>Pintu</option>
+            <option>Tokocrypto</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="modal-label" for="txFee">Fee (%) <i class="ti ti-lock" style="font-size:11px;color:var(--text-muted)" aria-hidden="true"></i></label>
+          <input type="number" step="0.01" class="modal-input" id="txFee" value="0.10">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="modal-label" for="txNote">Catatan / alasan (opsional)</label>
+        <input type="text" class="modal-input" id="txNote" placeholder="contoh: akumulasi karena P/E murah" autocomplete="off">
+        <p class="form-help">Catatan alasan ini akan jadi sangat berharga saat kamu review keputusan di masa depan.</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="wl-btn" id="txModalCancel">Batal</button>
+      <button class="wl-btn wl-btn-primary" id="txModalSave"><i class="ti ti-check" aria-hidden="true"></i>Simpan Transaksi</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" aria-label="Navigasi bawah">
+  <a href="../index.html" class="bottom-nav-item" aria-label="Dashboard"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Home</a>
+  <a href="watchlist.html" class="bottom-nav-item" aria-label="Watchlist"><i class="ti ti-list-check" aria-hidden="true"></i>Watchlist</a>
+  <a href="portofolio.html" class="bottom-nav-item" aria-label="Portofolio"><i class="ti ti-briefcase" aria-hidden="true"></i>Porto</a>
+  <a href="akun.html" class="bottom-nav-item" aria-label="Akun"><i class="ti ti-building-bank" aria-hidden="true"></i>Akun</a>
+  <button class="bottom-nav-item active" aria-label="Riwayat"><i class="ti ti-history" aria-hidden="true"></i>Riwayat</button>
+</nav>
+
+<script type="module" src="../js/firebase-config.js"></script>
+<script src="../js/auth-ui.js"></script>
+<script src="../js/storage-bridge.js"></script>
+<script src="../js/journal.js"></script>
+</body>
+</html>
